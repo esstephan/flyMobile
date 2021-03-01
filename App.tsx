@@ -1,19 +1,18 @@
-
-import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 import Landing from './src/components/Landing';
+import Signup from './src/components/Signup';
 import Birds from './src/components/Birds';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -21,16 +20,43 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        {/* <StatusBar barStyle="dark-content" /> */}
-        <Tab.Navigator initialRouteName="Landing">
-
-          <Tab.Screen name="Landing" component={Landing} />
-          <Tab.Screen name="Birds" component={Birds} />
-
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+                  switch (route.name) {
+                    case 'Landing':
+                      iconName = focused
+                      ? 'ios-information-circle'
+                      : 'ios-information-circle-outline';
+                      break;
+                    case 'Signup':
+                      iconName = focused
+                      ? 'ios-information-circle'
+                      : 'ios-information-circle-outline';
+                      break;
+                    case 'Birds': 
+                    iconName = focused
+                      ? 'ios-information-circle'
+                      : 'ios-information-circle-outline';
+                      break;
+                    default:
+                      break;
+                  }
+                  // You can return any component that you like here!
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+              })}
+              tabBarOptions={{
+                activeTintColor: 'deepskyblue',
+                inactiveTintColor: 'gray',
+              }}
+            >
+        <Tab.Screen name="Landing" component={Landing} />
+        <Tab.Screen name="Signup" component={Signup} />
+        <Tab.Screen name="Birds" component={Birds} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }

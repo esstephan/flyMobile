@@ -69,23 +69,7 @@ class Birds extends Component {
     }
 
     componentDidMount() {
-        db.collection("birds")
-        .get()
-        .then((querySnapshot: any[]) => {
-            let birds = new Array<Bird>();
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                let bird = {
-                    id: doc.id,
-                    ...doc.data()
-                }
-                birds.push(bird);
-            });
-            this.setState({birds})
-        })
-        .catch((error: Error) => {
-            console.log("Error getting documents: ", error);
-        });
+        this._fetchBirds();
     }
     
     render(){
@@ -121,7 +105,27 @@ class Birds extends Component {
     _onPress = (bird: Bird) => {
         const speed = bird.speed || 60;
         alert(`${bird.name} can fly ${speed} mph. Try them out!`);
-    }  
+    }
+
+    _fetchBirds = () => {
+        db.collection("birds")
+        .get()
+        .then((querySnapshot: any[]) => {
+            let birds = new Array<Bird>();
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                let bird = {
+                    id: doc.id,
+                    ...doc.data()
+                }
+                birds.push(bird);
+            });
+            this.setState({birds})
+        })
+        .catch((error: Error) => {
+            console.log("Error getting documents: ", error);
+        });
+    }
 
      _addBird = async() => {
         // get a random bird photo
@@ -141,6 +145,7 @@ class Birds extends Component {
         })
         .then(() => {
             console.log("Document successfully written!");
+            this._fetchBirds();
         })
         .catch((error: Error) => {
             console.error("Error writing document: ", error);

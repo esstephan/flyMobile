@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        // justifyContent: 'center',
     },
 
     backgroundContainer: {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         paddingTop:10,
         paddingBottom:10,
-        backgroundColor: Colors.darkBlue,
+        backgroundColor: 'deepskyblue',
         borderRadius:10,
     },
 
