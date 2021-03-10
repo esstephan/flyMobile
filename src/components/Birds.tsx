@@ -152,6 +152,21 @@ class Birds extends Component {
         });
     }
 
+    _deleteBird = async( id: string ) => {
+        db.collection("birds").delete({
+            name: 'Birdie',
+            id,
+            status: 'active',
+        })
+        .then(() => {
+            console.log("Document successfully written!");
+            this._fetchBirds();
+        })
+        .catch((error: Error) => {
+            console.error("Error writing document: ", error);
+        });
+    }
+
     // helpers
 
     _getBirdPhoto = async (): Promise<string> => {

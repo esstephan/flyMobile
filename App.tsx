@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Landing from './src/components/Landing';
-import Signup from './src/components/Signup';
+import LoginScreen from './src/components/Login';
 import Birds from './src/components/Birds';
 
 const styles = StyleSheet.create({
@@ -54,7 +54,8 @@ export default function App() {
               }}
             >
         <Tab.Screen name="Landing" component={Landing} />
-        <Tab.Screen name="Signup" component={Signup} />
+        {/* <Tab.Screen name="Signup" component={Signup} /> */}
+        <Tab.Screen name="Login" component={LoginScreen} />
         <Tab.Screen name="Birds" component={Birds} />
       </Tab.Navigator>
     </NavigationContainer>
